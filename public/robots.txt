@@ -1,12 +1,14 @@
-# Allow all bots (including Google and AI bots)
+# Allow all bots (General Rule)
 User-agent: *
 Allow: /
 
-# Explicitly allow Googlebot
+# Explicitly allow Google Search and Gemini AI
 User-agent: Googlebot
 Allow: /
+User-agent: Google-Extended
+Allow: /
 
-# Explicitly allow major AI bots
+# Explicitly allow other major AI bots
 User-agent: GPTBot
 Allow: /
 User-agent: ChatGPT-User
