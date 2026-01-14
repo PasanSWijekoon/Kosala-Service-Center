@@ -15,6 +15,8 @@ import HeavyVehicleFullService from './pages/HeavyVehicleFullService';
 import InteriorDetailing from './pages/InteriorDetailing';
 import VehicleAccessories from './pages/VehicleAccessories';
 import VehicleCutPolish from './pages/VehicleCutPolish';
+import TermsConditions from './pages/TermsConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import { useEffect } from 'react';
 import AOS from 'aos';
 
@@ -53,6 +55,8 @@ function App() {
           <Route path="/interior-detailing" element={<InteriorDetailing />} />
           <Route path="/vehicle-accessories" element={<VehicleAccessories />} />
           <Route path="/vehicle-cut-polish" element={<VehicleCutPolish />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

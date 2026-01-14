@@ -107,11 +107,13 @@ const Footer = () => {
       </div>
       <div className="border-top-color">
         <div className="b-container border-start border-end border-1 border-primary-color p-3">
-          <div className="d-flex flex-row flex-wrap justify-content-center justify-content-md-between align-items-center">
-            <p className="text-color-3 m-0 text-center text-md-start w-100 w-md-auto mb-2 mb-md-0">&copy; 2026 Kosala Service Center. All Rights Reserved.</p>
+          <div className="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center">
+            <div className="text-color-3 text-center text-md-start mb-2 mb-md-0">
+              &copy; 2026 Kosala Service Center. All Rights Reserved.
+            </div>
             <ul className="m-0 p-0 d-flex gap-3 footer-terms">
-              <li className="list-unstyled"><a href="#" className="text-color-3 border-end border-1 border-primary-color pe-3">Terms & Conditions</a></li>
-              <li className="list-unstyled"><a href="#" className="text-color-3">Privacy Policy</a></li>
+              <li className="list-unstyled"><Link to="/terms-conditions" className="text-color-3 border-end border-1 border-primary-color pe-3">Terms & Conditions</Link></li>
+              <li className="list-unstyled"><Link to="/privacy-policy" className="text-color-3">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
