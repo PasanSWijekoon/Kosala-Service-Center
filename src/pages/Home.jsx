@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import { Fancybox } from "@fancyapps/ui";
+import SEO from '../components/SEO';
+import useEmailForm from '../hooks/useEmailForm';
 
 const CountUpAnimation = ({ end, duration = 2000 }) => {
   const [count, setCount] = useState(0);
@@ -54,6 +56,30 @@ const CountUpAnimation = ({ end, duration = 2000 }) => {
 
 const Home = () => {
   const [activeWhyBox, setActiveWhyBox] = useState(0);
+  const appointmentFormRef = useRef();
+  const newsletterFormRef = useRef();
+
+  const { 
+    sendEmail: sendAppointment, 
+    loading: appointmentLoading, 
+    success: appointmentSuccess, 
+    error: appointmentError 
+  } = useEmailForm(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID_APPOINTMENT,
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+  );
+
+  const { 
+    sendEmail: sendNewsletter, 
+    loading: newsletterLoading, 
+    success: newsletterSuccess, 
+    error: newsletterError 
+  } = useEmailForm(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID_NEWSLETTER,
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+  );
 
   useEffect(() => {
     Fancybox.bind("[data-fancybox]", {
@@ -67,6 +93,16 @@ const Home = () => {
       Fancybox.destroy();
     };
   }, []);
+
+  const handleAppointmentSubmit = (e) => {
+    e.preventDefault();
+    sendAppointment(appointmentFormRef.current);
+  };
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    sendNewsletter(newsletterFormRef.current);
+  };
 
   const clientLogoSettings = {
     slidesToShow: 3,
@@ -174,6 +210,7 @@ const Home = () => {
 
   return (
     <main>
+      <SEO title="Home" description="Premium car detailing and repair service in Anuradhapura." />
       {/* Hero heading */}
       <section className="section">
         <div className="row position-relative z-1">
@@ -388,26 +425,50 @@ const Home = () => {
               <div className="bg-accent-color-2 rounded-4 p-4" data-aos="fade-left" data-aos-delay="200"
                 data-aos-duration="1000">
                 <h4 className="text-center">Book Your Car Detailing or Repair Appointment Today</h4>
-                <form className="form needs-validation" onSubmit={(e) => e.preventDefault()}>
+                
+                {appointmentSuccess && (
+                  <div className="toast align-items-center w-100 shadow-none mb-3 border border-success rounded-pill my-4 d-block"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="d-flex p-2">
+                      <div className="toast-body d-flex flex-row gap-3 align-items-center text-success">
+                        <i className="bi bi-check-circle-fill text-success"></i>
+                        Your Message Successfully Send.
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {appointmentError && (
+                  <div className="toast align-items-center w-100 shadow-none border-danger mb-3 my-4 border rounded-pill d-block"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="d-flex p-2">
+                      <div className="toast-body d-flex flex-row gap-3 align-items-center text-danger">
+                        <i className="bi bi-exclamation-triangle-fill text-danger"></i>
+                        Something Wrong! Send Form Failed.
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <form className="form needs-validation" ref={appointmentFormRef} onSubmit={handleAppointmentSubmit}>
                   <div className="row mb-2">
                     <div className="col-12 mb-4">
                       <label htmlFor="name" className="form-label">Name</label>
-                      <input type="text" name="name" id="name" className="form-control form-control-lg"
-                        placeholder="Enter your full name" aria-label="Name" />
+                      <input type="text" name="user_name" id="name" className="form-control form-control-lg"
+                        placeholder="Enter your full name" aria-label="Name" required />
                     </div>
                     <div className="col-12 mb-4">
                       <label htmlFor="email" className="form-label">Email</label>
-                      <input type="email" name="email" id="email" className="form-control form-control-lg"
-                        placeholder="Enter your mail" aria-label="Email" />
+                      <input type="email" name="user_email" id="email" className="form-control form-control-lg"
+                        placeholder="Enter your mail" aria-label="Email" required />
                     </div>
                     <div className="col-12 mb-4">
                       <select className="form-select form-control-lg" name="service" aria-label="Default select">
                         <option defaultValue>Select a service</option>
-                        <option value="1">Car Wash</option>
-                        <option value="2">Interior Detailing</option>
-                        <option value="3">Engine Repair</option>
-                        <option value="4">Body Polishing</option>
-                        <option value="5">Full Services</option>
+                        <option value="Car Wash">Car Wash</option>
+                        <option value="Interior Detailing">Interior Detailing</option>
+                        <option value="Engine Repair">Engine Repair</option>
+                        <option value="Body Polishing">Body Polishing</option>
+                        <option value="Full Services">Full Services</option>
                       </select>
                     </div>
                   </div>
@@ -415,15 +476,19 @@ const Home = () => {
                     <div className="col">
                       <label htmlFor="message" className="form-label">Message</label>
                       <textarea className="form-control form-control-lg" name="message" id="message" rows="8"
-                        placeholder="Describe your issue or request"></textarea>
+                        placeholder="Describe your issue or request" required></textarea>
                     </div>
                   </div>
                   <button type="submit"
-                    className="btn btn-cta-primary w-100 d-inline-flex py-3 d-flex align-items-center justify-content-center submit_form">
-                    Book Appointment Now
-                    <span className="btn-icon rounded-circle d-inline-flex align-items-center justify-content-center ms-2">
-                      <i className="bi bi-chevron-right text-white" style={{ fontSize: '10px' }}></i>
-                    </span>
+                    className="btn btn-cta-primary w-100 d-inline-flex py-3 d-flex align-items-center justify-content-center submit_form"
+                    disabled={appointmentLoading}
+                  >
+                    {appointmentLoading ? 'Sending...' : 'Book Appointment Now'}
+                    {!appointmentLoading && (
+                      <span className="btn-icon rounded-circle d-inline-flex align-items-center justify-content-center ms-2">
+                        <i className="bi bi-chevron-right text-white" style={{ fontSize: '10px' }}></i>
+                      </span>
+                    )}
                   </button>
                 </form>
               </div>
@@ -788,20 +853,44 @@ const Home = () => {
             <h2 className="my-4 text-center">GET EXCLUSIVE OFFERS AND CAR TIPS</h2>
             <p className="max-w-780 text-center">Join our newsletter to receive the latest updates, maintenance tips, and
               exclusive offers straight to your inbox. Stay ahead in car care and never miss a deal!</p>
-            <form className="form needs-validation mt-4 d-flex flex-column flex-md-row max-w-717" onSubmit={(e) => e.preventDefault()}>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+              <div id="liveToast" className={`toast text-bg-light ${newsletterSuccess ? 'show' : 'hide'}`} role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div className="d-flex">
+                  <div className="toast-body">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i> Your Subscription Was Successful!
+                  </div>
+                  <button type="button" className="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+              </div>
+              {newsletterError && (
+                 <div className="toast show text-bg-danger" role="alert">
+                    <div className="d-flex">
+                      <div className="toast-body">
+                        {newsletterError}
+                      </div>
+                    </div>
+                 </div>
+              )}
+            </div>
+            <form className="form needs-validation mt-4 d-flex flex-column flex-md-row max-w-717" ref={newsletterFormRef} onSubmit={handleNewsletterSubmit}>
               <input type="text" name="action" value="subscribe" hidden readOnly />
-              <input type="email" name="email" id="email" className="form-control form-control-lg"
+              <input type="email" name="user_email" id="email" className="form-control form-control-lg"
                 placeholder="Enter your email address" required />
               <div className="invalid-feedback text-white">
                 Please provide a valid email format (e.g.,
                 user@example.com).
               </div>
               <button type="submit"
-                className="btn btn-cta-primary w-100 d-inline-flex py-3 d-flex align-items-center justify-content-center submit_subscribe no-bottom-left-radius max-w-200 mt-3 mt-md-0">
-                Subscribe Now
-                <span className="btn-icon rounded-circle d-inline-flex align-items-center justify-content-center ms-2">
-                  <i className="bi bi-chevron-right text-white" style={{ fontSize: '10px' }}></i>
-                </span>
+                className="btn btn-cta-primary w-100 d-inline-flex py-3 d-flex align-items-center justify-content-center submit_subscribe no-bottom-left-radius max-w-200 mt-3 mt-md-0"
+                disabled={newsletterLoading}
+              >
+                {newsletterLoading ? 'Subscribing...' : 'Subscribe Now'}
+                {!newsletterLoading && (
+                  <span className="btn-icon rounded-circle d-inline-flex align-items-center justify-content-center ms-2">
+                    <i className="bi bi-chevron-right text-white" style={{ fontSize: '10px' }}></i>
+                  </span>
+                )}
               </button>
             </form>
           </div>
