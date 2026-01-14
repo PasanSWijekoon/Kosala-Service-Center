@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Services = () => {
   return (
     <main>
+      <SEO title="Services" description="Explore our range of car detailing and repair services." />
       {/* Banner */}
       <section className="section position-relative"
         style={{ backgroundImage: "url('/images/car-detailing-concept-JMVPTUQ.jpg')" }}>

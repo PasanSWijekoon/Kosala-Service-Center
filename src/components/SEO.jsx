@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 const SEO = ({ title, description }) => {
   return (
     <Helmet>
-      <title>{title} | Kosala Service Center</title>
+      <title>Kosala Service Center | {title}</title>
       <meta name="description" content={description} />
     </Helmet>
   );

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const ContactUs = () => {
   return (
     <main>
+      <SEO title="Contact Us" description="Get in touch with Kosala Service Center for appointments and inquiries." />
       {/* Banner */}
       <section className="section position-relative"
         style={{ backgroundImage: "url('/images/car-service-workers-disassembling-car-interior-VZ8SA3R.jpg')" }}>

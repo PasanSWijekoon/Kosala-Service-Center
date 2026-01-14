@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const FAQ = () => {
   return (
     <main>
+      <SEO title="FAQ" description="Frequently Asked Questions about our services and processes." />
       {/* Banner */}
       <section className="section position-relative"
         style={{ backgroundImage: "url('/images/worker-cleaning-modern-vehicle-alloy-wheels-using-C5557ZH.jpg')" }}>        

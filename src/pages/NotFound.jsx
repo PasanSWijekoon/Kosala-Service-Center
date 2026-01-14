@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const NotFound = () => {
   return (
     <section className="d-flex justify-content-center align-items-center text-center overflow-hidden"
       style={{ backgroundImage: "url('/images/car-protection-with-special-films-8CFTV9D.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}>
+      <SEO title="Page Not Found" description="The page you are looking for does not exist." />
       <div className="bg-overlay-4"></div>
       <div className="b-container" style={{ padding: '0 15px' }}>
         <div className="row justify-content-center">
