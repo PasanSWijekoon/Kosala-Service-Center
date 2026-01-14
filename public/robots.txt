@@ -1,4 +1,20 @@
+# Allow all bots (including Google and AI bots)
 User-agent: *
 Allow: /
 
-Sitemap: https://kosalaservicecenter.com/sitemap.xml
+# Explicitly allow Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Explicitly allow major AI bots
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+# Link to your sitemap
+Sitemap: https://www.kosalaservicecenter.com/sitemap.xml
