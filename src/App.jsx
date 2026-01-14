@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import ContactUs from './pages/ContactUs';
@@ -32,6 +33,7 @@ function App() {
       <Header />
       <Outlet />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 
