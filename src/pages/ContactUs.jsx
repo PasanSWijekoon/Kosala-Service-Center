@@ -59,7 +59,7 @@ const ContactUs = () => {
                   </li>
                   <li className="list-unstyled mb-3 d-flex align-items-center">
                     <i className="bi bi-envelope text-primary-color fs-5 me-2"></i>
-                    support@kosalaservicecenter.com
+                    kosalaservicecenter@gmail.com
                   </li>
                   <li className="list-unstyled d-flex align-items-center">
                     <i className="bi bi-clock text-primary-color fs-5 me-2"></i>

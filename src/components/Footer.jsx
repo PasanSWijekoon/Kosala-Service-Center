@@ -92,7 +92,7 @@ const Footer = () => {
               <a href="#" className="icon-contact me-0 me-md-3"><i className="bi bi-envelope fs-3"></i></a>
               <div className="d-flex flex-column text-center text-md-start">
                 <p className="text-small text-color-3 mb-1">EMAIL ADDRESS</p>
-                <h5 className="mb-0">support@kosalaservicecenter.com</h5>
+                <h5 className="mb-0">kosalaservicecenter@gmail.com</h5>
               </div>
             </div>
             <div className="d-flex flex-column flex-md-row align-items-center align-items-md-start">

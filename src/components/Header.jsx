@@ -5,7 +5,7 @@ const Header = () => {
   const logo = "/images/car-shop-logo-V49ANM.png";
   return (
     <header className="header border-bottom-color">
-      <div className="border-bottom-color top-header d-none d-md-block">
+      <div className="border-bottom-color top-header d-none d-lg-block">
         <div className="b-container">
           <div className="d-flex justify-content-between align-items-center p-3 border-1 border-start border-end border-primary-color">
             <ul className="p-0 m-0 d-flex gap-3 gap-lg-5">
@@ -15,7 +15,7 @@ const Header = () => {
               </li>
               <li className="list-unstyled">
                 <i className="bi bi-check-circle text-primary-color fs-5 me-2"></i>
-                support@kosalaservicecenter.com
+                kosalaservicecenter@gmail.com
               </li>
               <li className="list-unstyled">
                 <i className="bi bi-check-circle text-primary-color fs-5 me-2"></i>
